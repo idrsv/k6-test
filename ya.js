@@ -12,27 +12,29 @@ const wwwSuccessRate = new Rate('wwwSuccessRate');
 
 export let options = {
     scenarios: {
-        ya_scenario: {
-            executor: 'ramping-vus',
-            exec: 'yaRuTest',
-            stages: [
-                { duration: '5m', target: 60 },
-                { duration: '10m', target: 60 },
-                { duration: '5m', target: 72 },
-                { duration: '10m', target: 72 },
-            ],
+            ya_scenario: {
+                executor: 'ramping-vus',
+                exec: 'yaRuTest',
+                stages: [
+                    { duration: '5m', target: 60 },
+                    { duration: '10m', target: 60 },
+                    { duration: '5m', target: 72 },
+                    { duration: '10m', target: 72 },
+                ],
+                startVUs: 0,
+            },
+            www_scenario: {
+                executor: 'ramping-vus',
+                exec: 'wwwRuTest',
+                stages: [
+                    { duration: '5m', target: 120 },
+                    { duration: '10m', target: 120 },
+                    { duration: '5m', target: 144 },
+                    { duration: '10m', target: 144 },
+                ],
+                startVUs: 0,
+            },
         },
-        www_scenario: {
-            executor: 'ramping-vus',
-            exec: 'wwwRuTest',
-            stages: [
-                { duration: '5m', target: 60 },
-                { duration: '10m', target: 60 },
-                { duration: '5m', target: 72 },
-                { duration: '10m', target: 72 },
-            ],
-        },
-    },
     thresholds: {
         'yaSuccessRate': ['rate>0.95'],
         'wwwSuccessRate': ['rate>0.95'],
